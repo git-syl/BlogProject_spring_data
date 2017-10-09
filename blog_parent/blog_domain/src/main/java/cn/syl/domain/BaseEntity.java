@@ -21,13 +21,13 @@ public class BaseEntity implements Serializable {
 //            generator="ID_GENERATOR")//这里的生成器和上面的生成器名称对应
 //    private Long baseId;
 
-    private int sort = 0; //decimal	10	0	0	0	0	0	0		0	排序（升序）				0	0
-    private String create_by;  //varchar	64	0	0	0	0	0	0		0	创建者	utf8	utf8_bin		0	0
-    private Date create_date ;         //datetime	0	0	0	0	0	0	0		0	创建时间				0	0
-    private String update_by;    //varchar	64	0	0	0	0	0	0		0	更新者	utf8	utf8_bin		0	0
-    private Date update_date = new Date();      //datetime	0	0	0	0	0	0	0		0	更新时间				0	0
-    private String remarks;      //varchar	255	0	-1	0	0	0	0		0	备注信息	utf8	utf8_bin		0	0
-    private Boolean del_flag =false;    //char	1	0	0	0	0	0	0	'0'	0	删除标记	utf8	utf8_bin		0	0
+    private int sort = 0; //排序（升序）
+    private String create_by;  //varchar	创建者
+    private Date create_date ;         //datetime	创建时间
+    private String update_by;    //更新者
+    private Date update_date = new Date();      //datetime	更新时间
+    private String remarks;      //备注信息
+    private Boolean del_flag =false;    //删除标记
 
     public BaseEntity() {
     }

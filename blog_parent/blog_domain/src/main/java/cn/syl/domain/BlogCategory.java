@@ -19,13 +19,20 @@ public class BlogCategory {
 
     private String categoryName;
 
+    /**
+     * 父父类
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pid")
     private BlogCategory parentCategory;
 
-    @OneToMany(targetEntity = BlogCategory.class, cascade = { CascadeType.ALL }, mappedBy = "parentCategory")
-    @Fetch(FetchMode.SUBSELECT)
-    private Set<BlogCategory> childCategories = new HashSet<BlogCategory>(0);
+    /**
+     * 子分类
+     */
+   // @OneToMany(targetEntity = BlogCategory.class, cascade = { CascadeType.ALL }, mappedBy = "parentCategory")
+//    @OneToMany(targetEntity = BlogCategory.class, cascade = { CascadeType.ALL })
+//    @Fetch(FetchMode.SUBSELECT)
+//    private Set<BlogCategory> childCategories = new HashSet<BlogCategory>(0);
 
     //外键由 Blog blogCategory 维护
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE},
@@ -67,13 +74,13 @@ public class BlogCategory {
         this.parentCategory = parentCategory;
     }
 
-    public Set<BlogCategory> getChildCategories() {
-        return childCategories;
-    }
-
-    public void setChildCategories(Set<BlogCategory> childCategories) {
-        this.childCategories = childCategories;
-    }
+//    public Set<BlogCategory> getChildCategories() {
+//        return childCategories;
+//    }
+//
+//    public void setChildCategories(Set<BlogCategory> childCategories) {
+//        this.childCategories = childCategories;
+//    }
 
     public Set<Blog> getBlogs() {
         return blogs;
