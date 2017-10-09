@@ -46,6 +46,8 @@
         <freemarker.version>2.3.23</freemarker.version>
         <quartz.version>2.2.2</quartz.version>
         <shiro.version>1.2.2</shiro.version>
+        <springdata.version>1.8.0.RELEASE</springdata.version>
+        <hibernate.version>4.3.6.Final</hibernate.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -114,16 +116,16 @@
                 <version>${slf4j.version}</version>
             </dependency>
             <!-- Mybatis -->
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis.spring.version}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.mybatis</groupId>-->
+                <!--<artifactId>mybatis</artifactId>-->
+                <!--<version>${mybatis.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.mybatis</groupId>-->
+                <!--<artifactId>mybatis-spring</artifactId>-->
+                <!--<version>${mybatis.spring.version}</version>-->
+            <!--</dependency>-->
             <!--<dependency>-->
                 <!--<groupId>com.github.miemiedev</groupId>-->
                 <!--<artifactId>mybatis-paginator</artifactId>-->
@@ -141,10 +143,23 @@
                 <version>${mysql.version}</version>
             </dependency>
             <!-- 连接池 -->
+            <!--<dependency>-->
+                <!--<groupId>com.alibaba</groupId>-->
+                <!--<artifactId>druid</artifactId>-->
+                <!--<version>${druid.version}</version>-->
+            <!--</dependency>-->
+            <!--spring data-->
+
+            <!--spring data jpa-->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>${druid.version}</version>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${springdata.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
             </dependency>
             <!-- Spring -->
             <dependency>
