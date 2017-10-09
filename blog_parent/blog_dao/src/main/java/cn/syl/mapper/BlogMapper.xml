@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.syl.mapper.BlogMapper" >
+  <select id="findAll" resultType="cn.syl.pojo.Blog2">
+    SELECT
+      t_blog.blog_id blogId,
+      t_blog.category_id categoryId,
+      t_category.`name` categoryName,
+      t_blog.blog_title blogTitle,
+      t_blog.blog_content blogContent,
+      t_blog.create_by createBy,
+      t_blog.create_time createTime,
+      t_blog.update_by updateBy,
+      t_blog.update_time updateTime,
+      t_blog.`status`,
+      t_blog.sort_order sortOrder
+    FROM
+      t_blog
+      LEFT JOIN
+      t_category  ON t_blog.category_id = t_category.category_id
+    WHERE
+      t_blog.`status` = 1
+  </select>
+
+  <select id="findListByBlogId" resultType="cn.syl.pojo.Blog2">
+    SELECT
+      t_blog.blog_id blogId,
+      t_blog.category_id categoryId,
+      t_category.`name` categoryName,
+      t_blog.blog_title blogTitle,
+      t_blog.blog_content blogContent,
+      t_blog.create_by createBy,
+      t_blog.create_time createTime,
+      t_blog.update_by updateBy,
+      t_blog.update_time updateTime,
+      t_blog.`status`,
+      t_blog.sort_order sortOrder
+    FROM
+      t_blog
+      LEFT JOIN
+      t_category  ON t_blog.category_id = t_category.category_id
+    WHERE
+      t_blog.category_id=#{id} AND
+      t_blog.`status` = 1
+  </select>
+</mapper>

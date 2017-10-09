@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.syl.mapper.CategoryMapper2">
+    <resultMap type="cn.syl.pojo.Category2" id="categoryResultMap">
+        <id column="category_id" property="categoryId" jdbcType="BIGINT" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="is_parent" property="isParent" jdbcType="TINYINT" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+        <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
+
+        <association property="parentCategory" javaType="cn.syl.pojo.Category2">
+            <id column="b_category_id" property="categoryId" jdbcType="BIGINT" />
+            <result column="b_parent_id" property="parentId" jdbcType="BIGINT" />
+            <result column="b_name" property="name" jdbcType="VARCHAR" />
+            <result column="b_is_parent" property="isParent" jdbcType="TINYINT" />
+            <result column="b_create_by" property="createBy" jdbcType="VARCHAR" />
+            <result column="b_create_time" property="createTime" jdbcType="TIMESTAMP" />
+            <result column="b_update_by" property="updateBy" jdbcType="VARCHAR" />
+            <result column="b_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+            <result column="b_status" property="status" jdbcType="TINYINT" />
+            <result column="b_sort_order" property="sortOrder" jdbcType="INTEGER" />
+        </association>
+
+    </resultMap>
+  <select id="findAll" resultMap="categoryResultMap">
+      SELECT
+          a.category_id,
+          a.parent_id,
+          a.`name`,
+          a.is_parent,
+          a.create_by,
+          a.create_time,
+          a.update_by,
+          a.update_time,
+          a.`status`,
+          a.sort_order,
+
+          b.category_id as "b_category_id",
+          b.parent_id as "b_parent_id",
+          b.`name` as "b_name",
+          b.is_parent as "b_is_parent",
+          b.create_by as "b_create_by",
+          b.create_time as "b_create_time",
+          b.update_by as "b_update_by",
+          b.update_time as "b_update_time",
+          b.`status` as "b_status",
+          b.sort_order as "b_sort_order"
+      FROM
+          t_category AS a
+          LEFT JOIN t_category AS b ON a.parent_id = b.category_id
+      where a.status =1
+  </select>
+    <select id="findAllWithoutEmbedded" resultMap="categoryResultMap">
+        SELECT
+            a.category_id,
+            a.parent_id,
+            a.`name`,
+            a.is_parent,
+            a.create_by,
+            a.create_time,
+            a.update_by,
+            a.update_time,
+            a.`status`,
+            a.sort_order
+        FROM
+            t_category AS a
+        where a.status =1
+    </select>
+
+    <insert id="addCategory" parameterType="cn.syl.pojo.Category2" >
+        insert into t_category (category_id, parent_id, name,
+                                is_parent, create_by, create_time,
+                                update_by, update_time, status,
+                                sort_order)
+        values (#{categoryId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+                #{isParent,jdbcType=TINYINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+                #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT},
+                #{sortOrder,jdbcType=INTEGER})
+    </insert>
+    <delete id="deleteCategory" >
+        DELETE  FROM t_category WHERE category_id=#{id}
+    </delete>
+    <select id="findListByParentId" resultMap="categoryResultMap">
+        SELECT
+            a.category_id,
+            a.parent_id,
+            a.`name`,
+            a.is_parent,
+            a.create_by,
+            a.create_time,
+            a.update_by,
+            a.update_time,
+            a.`status`,
+            a.sort_order
+        FROM
+            t_category AS a
+        where a.parent_id =#{id}
+    </select>
+</mapper>
